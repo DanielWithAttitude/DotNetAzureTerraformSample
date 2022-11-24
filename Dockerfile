@@ -12,7 +12,9 @@ RUN dotnet publish -c Release -o output
 #generate runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
-COPY --from=build-env /app/output .
+#copy files from build stage and publish output
+COPY --from=build-env /app/output .     
+EXPOSE 80
 ENTRYPOINT ["dotnet","weatherapi.dll"]
 
 
