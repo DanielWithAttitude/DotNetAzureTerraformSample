@@ -16,6 +16,11 @@ terraform {
   }
 }
 
+variable "imagebuild" {
+  type = string
+  description = "Lastest build"
+}
+
 
 provider "azurerm" {
     features {}
@@ -37,7 +42,7 @@ resource "azurerm_container_group" "terraform_congrp" {
 
     container {
         name = "weatherapi"
-        image = "daniel2299/weatherapi:RELEASE.0.0.2"
+        image = "daniel2299/weatherapi:${var.imagebuild}"
         cpu = "1"
         memory = "1"
         ports {
